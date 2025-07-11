@@ -13,7 +13,7 @@ const routes = [
     children: [
       { index: true, element: <Home /> },
       { path: "shop", element: <Shop /> },
-      //   { path: "cart", element: <Cart /> },
+      { path: "cart", element: <Cart /> },
     ],
   },
 ];
