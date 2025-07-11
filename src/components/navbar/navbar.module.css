@@ -1,19 +1,26 @@
 .navbar {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+  background-color: #333;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
 }
 
-.list {
-    display: flex;
-    flex-direction: row;
+.link {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
 }
 
-.item{
-    list-style-type: none;
+.link:hover {
+  background-color: #ddd;
+  color: black;
 }
 
-.section {
-    display: flex;
-    flex-direction: row;
+.link:last-child{
+    float: right;
 }
