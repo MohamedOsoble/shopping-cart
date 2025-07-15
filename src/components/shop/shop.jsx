@@ -1,5 +1,7 @@
+import Products from "../products/products";
+
 const Shop = () => {
-  return <div>Hello</div>;
+  return <div>{Products()}</div>;
 };
 
 export default Shop;
