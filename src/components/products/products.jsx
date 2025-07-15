@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import styles from "./products.module.css";
 
 const getProducts = () => {
   const [data, setData] = useState([]);
@@ -23,10 +24,11 @@ const getProducts = () => {
 
 const productCard = (product) => {
   return (
-    <div>
-      <h1>{product.title}</h1>
-      <p>{product.description}</p>
-      <img src={product.image}></img>
+    <div key={product.id} className={styles.card}>
+      <h1 className={styles.title}>{product.title}</h1>
+      <img className={styles.image} src={product.image}></img>
+      <p>£{product.price}</p>
+      <button>Add to Cart</button>
     </div>
   );
 };
@@ -38,7 +40,7 @@ const Products = () => {
   if (error) return <p>A network error was encountered</p>;
 
   return (
-    <div>
+    <div className={styles.container}>
       {data.map((product) => {
         return productCard(product);
       })}

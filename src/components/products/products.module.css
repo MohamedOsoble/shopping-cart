@@ -1,0 +1,26 @@
+.container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card {
+    display: flex;
+    flex: 1 0 21%;
+    width: 200px;
+    height: 500px;
+    flex-direction: column;
+    border: 2px solid black;
+    border-radius: 12px;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+}
+
+.title{
+    font-size: 12px;
+    padding: 20px;
+}
+
+.image {
+    width: 150px;
+}
