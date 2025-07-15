@@ -27,7 +27,12 @@ const productCard = (product) => {
     <div key={product.id} className={styles.card}>
       <h1 className={styles.title}>{product.title}</h1>
       <img className={styles.image} src={product.image}></img>
-      <p>£{product.price}</p>
+      <p>
+        {product.price.toLocaleString("en-GB", {
+          style: "currency",
+          currency: "GBP",
+        })}
+      </p>
       <button>Add to Cart</button>
     </div>
   );
