@@ -1,6 +1,7 @@
 import { getProducts } from "../products/products";
 import { useOutletContext } from "react-router-dom";
 import styles from "../products/products.module.css";
+import { useNavigate } from "react-router-dom";
 
 const manageCart = () => {
   return cartItems;
@@ -8,6 +9,7 @@ const manageCart = () => {
 
 const Cart = () => {
   const [data, error, loading, cartItems, setCartItems] = useOutletContext();
+  let navigate = useNavigate();
 
   const getItem = (id) => {
     return data.find((item) => item.id == id);
@@ -102,6 +104,7 @@ const Cart = () => {
     alert(
       "If the store actually worked, this would be the end of the process!"
     );
+    navigate("/");
   };
 
   if (cartItems.length < 1) return <div>There are no items in your cart</div>;
