@@ -1,4 +1,4 @@
-import Products from "../products/products";
+import { Products } from "../products/products";
 
 const Shop = () => {
   return <div>{Products()}</div>;
