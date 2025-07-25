@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from "./products.module.css";
-import { useOutletContext } from "react-router-dom";
+import { useOutletContext, Link } from "react-router-dom";
 
 const getProducts = () => {
   const [data, setData] = useState([]);
@@ -24,85 +24,29 @@ const getProducts = () => {
 };
 
 const Products = () => {
-  const [data, error, loading, cartItems, setCartItems] = useOutletContext();
-
-  const getItem = (id) => {
-    return data.find((item) => item.id == id);
-  };
-
-  const isItemInCart = (id) => {
-    return cartItems.find((cartItem) => cartItem.id == id);
-  };
-
-  const handleAdd = (e) => {
-    const id = e.currentTarget.getAttribute("id");
-    const item = getItem(id);
-    const inCart = isItemInCart(id);
-    console.log(item, id);
-
-    if (inCart) {
-      setCartItems(
-        cartItems.map((cartItem) =>
-          cartItem.id == id
-            ? { ...cartItem, quantity: cartItem.quantity + 1 }
-            : cartItem
-        )
-      );
-    } else {
-      setCartItems([...cartItems, { ...item, quantity: 1 }]);
-    }
-  };
-
-  const handleRemove = (e) => {
-    const id = e.currentTarget.getAttribute("id");
-    const item = getItem(id);
-    const inCart = isItemInCart(id);
-    console.log(item, id);
-
-    if (inCart.quantity === 1) {
-      setCartItems(cartItems.filter((cartItem) => cartItem.id !== item.id));
-    } else {
-      setCartItems(
-        cartItems.map((cartItem) =>
-          cartItem.id === item.id
-            ? { ...cartItem, quantity: cartItem.quantity - 1 }
-            : cartItem
-        )
-      );
-    }
-  };
-
-  const renderButtons = (inCart, product) => {
-    if (inCart) {
-      return (
-        <>
-          <button id={product.id} onClick={handleAdd}>
-            +
-          </button>
-          <button id={product.id} onClick={handleRemove}>
-            -
-          </button>
-          <p>{inCart.quantity}</p>
-        </>
-      );
-    } else {
-      return (
-        <>
-          <button id={product.id} onClick={handleAdd}>
-            Add to Cart
-          </button>
-        </>
-      );
-    }
-  };
+  const [
+    data,
+    error,
+    loading,
+    cartItems,
+    setCartItems,
+    renderButtons,
+    isItemInCart,
+    handleAdd,
+    handleRemove,
+  ] = useOutletContext();
 
   const productCard = (product) => {
     const inCart = isItemInCart(product.id);
+    const productLink = "/item/" + product.id.toString();
 
     return (
       <div id={product.id} key={product.id} className={styles.card}>
-        <h1 className={styles.title}>{product.title}</h1>
-        <img className={styles.image} src={product.image}></img>
+        <Link to={productLink}>
+          <h1 className={styles.title}>{product.title}</h1>
+          <img className={styles.image} src={product.image}></img>
+        </Link>
+
         <p>
           {product.price.toLocaleString("en-GB", {
             style: "currency",

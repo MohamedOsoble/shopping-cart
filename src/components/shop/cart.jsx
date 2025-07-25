@@ -8,54 +8,18 @@ const manageCart = () => {
 };
 
 const Cart = () => {
-  const [data, error, loading, cartItems, setCartItems] = useOutletContext();
+  const [
+    data,
+    error,
+    loading,
+    cartItems,
+    setCartItems,
+    renderButtons,
+    isItemInCart,
+    handleAdd,
+    handleRemove,
+  ] = useOutletContext();
   let navigate = useNavigate();
-
-  const getItem = (id) => {
-    return data.find((item) => item.id == id);
-  };
-
-  const isItemInCart = (id) => {
-    return cartItems.find((cartItem) => cartItem.id == id);
-  };
-
-  const handleAdd = (e) => {
-    const id = e.currentTarget.getAttribute("id");
-    const item = getItem(id);
-    const inCart = isItemInCart(id);
-    console.log(item, id);
-
-    if (inCart) {
-      setCartItems(
-        cartItems.map((cartItem) =>
-          cartItem.id == id
-            ? { ...cartItem, quantity: cartItem.quantity + 1 }
-            : cartItem
-        )
-      );
-    } else {
-      setCartItems([...cartItems, { ...item, quantity: 1 }]);
-    }
-  };
-
-  const handleRemove = (e) => {
-    const id = e.currentTarget.getAttribute("id");
-    const item = getItem(id);
-    const inCart = isItemInCart(id);
-    console.log(item, id);
-
-    if (inCart.quantity === 1) {
-      setCartItems(cartItems.filter((cartItem) => cartItem.id !== item.id));
-    } else {
-      setCartItems(
-        cartItems.map((cartItem) =>
-          cartItem.id === item.id
-            ? { ...cartItem, quantity: cartItem.quantity - 1 }
-            : cartItem
-        )
-      );
-    }
-  };
 
   const clearCart = () => {
     setCartItems([]);
